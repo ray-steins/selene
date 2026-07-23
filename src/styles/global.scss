@@ -1,8 +1,31 @@
+:root {
+  --color-background: #fbfafa;
+  --color-foreground: #333;
+  --color-foreground-inverse: ;
+
+  --color-border: #111;
+
+  --color-semantic-warning: #ff2929;
+}
+
 html,
 body {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+}
+
+body {
+  gap: var(--unit-xsm);
+  font-family: var(--font-inter);
+  
+  padding: var(--unit-xsm);
+  background: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  color: var(--color-foreground);
+  letter-spacing: .3px;
 }
 
 * {

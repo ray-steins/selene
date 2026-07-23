@@ -1,0 +1,39 @@
+import { getClassBySlug, getClasses } from "@/data/class";
+import ClassSlugClient from "./ClassSlug";
+import { getUserClasses } from "@/data/user";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+
+export type ClassComplete = Awaited<ReturnType<typeof getClassBySlug>>;
+
+function NotInClass() {
+  return (
+    <div>
+      <h1>You do not have access to this class.</h1>
+    </div>
+  )
+}
+
+export default async function ClassSlug({
+  params
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
+
+  const currentUser = session?.user;
+
+  const slug = (await params).slug;
+  const c: ClassComplete = await getClassBySlug(slug);
+  const classList = await getUserClasses(currentUser!.id);
+
+  if (!classList?.some(c => c.slug === slug)) return <NotInClass />;
+
+  return (
+    <>
+      <ClassSlugClient data={c} classList={classList}/>
+    </>
+  )
+}

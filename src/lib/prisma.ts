@@ -1,0 +1,34 @@
+import { PrismaClient } from '@prisma/client';
+import { readReplicas } from '@prisma/extension-read-replicas'
+import { withAccelerate } from '@prisma/extension-accelerate';
+import { PrismaPg } from "@prisma/adapter-pg";
+
+/*
+ * WRITE: $primary
+ * READ: $replica
+ */
+
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL!,
+})
+
+/*const replica = new PrismaPg({
+  connectionString: process.env.DATABASE_REPLICA_URL,
+});*/
+
+const extended = new PrismaClient({ adapter })
+  .$extends(withAccelerate())
+
+const prismaGlobal = globalThis as unknown as {
+  prisma: typeof extended | undefined;
+}
+
+const prisma = 
+  prismaGlobal.prisma ??
+  extended
+
+if (process.env.NODE_ENV !== 'production') {
+  prismaGlobal.prisma = prisma;
+}
+
+export { prisma };

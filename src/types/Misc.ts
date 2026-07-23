@@ -1,0 +1,1 @@
+export type UIComponentSizes = 'sm' | 'md' | 'lg' | 'xlg'
