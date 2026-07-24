@@ -7,5 +7,10 @@ export const ROUTES = {
   auth: {
     signin: '/auth/signin',
     signup: '/auth/signup'
+  },
+  dashboard: {
+    base: '/dashboard',
+    assignments: '/dashboard/assignments/',
+    classes: '/dashboard/classes/'
   }
 } as const

@@ -1,8 +1,7 @@
 import { getClassBySlug, getClasses } from "@/data/class";
 import ClassSlugClient from "./ClassSlug";
 import { getUserClasses } from "@/data/user";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { getCurrentUserFromServer } from "@/data/user";
 
 export type ClassComplete = Awaited<ReturnType<typeof getClassBySlug>>;
 
@@ -19,11 +18,7 @@ export default async function ClassSlug({
 }: {
   params: Promise<{ slug: string }>
 }) {
-  const session = await auth.api.getSession({
-    headers: await headers()
-  });
-
-  const currentUser = session?.user;
+  const currentUser = await getCurrentUserFromServer();
 
   const slug = (await params).slug;
   const c: ClassComplete = await getClassBySlug(slug);

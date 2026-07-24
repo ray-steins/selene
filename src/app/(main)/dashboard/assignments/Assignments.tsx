@@ -1,21 +1,16 @@
 'use client'
-import { AssignmentType } from "@/data/assignments"
 import CreateAssignmentModal from "./components/CreateAssignmentModal"
-import { AssignmentDisplay } from "../components/AssignmentDisplay"
-import { Class } from "@prisma/client"
+import { AssignmentDisplay, AssignmentDisplayProps } from "../components/AssignmentDisplay"
 
-type DataProps = {
-  assignments: AssignmentType[],
-  classes: Class[]
-}
+type DataProps = {} & AssignmentDisplayProps
 
 export default function AssignmentsPageClient({
   assignments,
   classes
 }: DataProps) {
   return (
-     <div>
+    <div>
       <AssignmentDisplay assignments={assignments} classes={classes}/>
-     </div>
+    </div>
   )
 }

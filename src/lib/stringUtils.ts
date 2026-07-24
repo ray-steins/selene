@@ -102,3 +102,14 @@ export function flattenObject(obj: Record<string, any>, prefix?: string): Record
     return acc;
   }, {} as Record<string, any>);
 };
+
+export function fixDate(
+  date: Date,
+  locales?: string | string[],
+  options?: Intl.DateTimeFormatOptions
+) {
+  return date.toLocaleDateString(locales ?? 'en-US', options ?? {
+  weekday: 'long',
+  day: '2-digit',
+  month: 'short'});
+}

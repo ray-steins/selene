@@ -1,18 +1,19 @@
-'use client';
+import { AssignmentDisplay } from "./dashboard/components/AssignmentDisplay";
+import { getCurrentUserFromServer, getUserClasses } from "@/data/user";
+import HomePageClient from "./Home";
 
-import { useContext } from "react";
-import { UserContext } from "@/contexts/UserContex";
+export default async function MainPage() {
+  const currentUser = await getCurrentUserFromServer();
+  if (!currentUser) return <span>Not signed in yet.</span>
 
-export default function MainPage() {
-  const user = useContext(UserContext);
-  const currentUser = user?.user;
-
-  const message = currentUser ? `Hi ${ currentUser?.email }` : `You're not signed in yet.`
+  const userClasses = await getUserClasses(currentUser.id) ?? [];
 
   return (
     <>
-      <h1>{ message }</h1>
-      <p>Welcome to Selene, an assignment tracker application designed by Ray Steins.</p>
+      <HomePageClient 
+        user={currentUser}
+        classes={userClasses}
+      />
     </>
   )
 }

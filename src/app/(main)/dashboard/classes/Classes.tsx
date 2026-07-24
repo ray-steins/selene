@@ -5,6 +5,7 @@ import { useContext, useRef } from "react";
 import { UserContext } from "@/contexts/UserContex";
 
 import { useState, useOptimistic, startTransition } from "react";
+import { ROUTES } from "@/configs/app.config";
 
 function ClassCard({
   data,
@@ -126,7 +127,7 @@ export default function ClassesPageClient({
       <button type='button' onClick={addClass}>Add Class</button>
       <div>
         {optimisticClass.map((v, i) => {
-          const link = `/dashboard/classes/${v.slug}`;
+          const link = `${ROUTES.dashboard.classes}${v.slug}`;
 
           return (
             <div key={`${v}-${i}`}>
