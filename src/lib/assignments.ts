@@ -1,4 +1,4 @@
-import { AssignmentStatus, Class, Assignment } from "@prisma/client";
+import { AssignmentStatus, Class, Assignment } from "@/generated/prisma";
 import { getStartAndEndOfDate } from "./utils/dateUtils";
 
 export type AssignmentWithClass = ({

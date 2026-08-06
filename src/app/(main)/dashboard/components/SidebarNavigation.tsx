@@ -4,7 +4,7 @@ import { APP_NAVIGATION_ROUTES } from "@/configs/app.config";
 import style from './dashboard-components.module.scss';
 import { usePathname } from "next/navigation";
 import CreateAssignmentModal from "../assignments/components/CreateAssignmentModal";
-import { Class } from "@prisma/client";
+import { Class } from "@/generated/prisma";
 
 function Item({
   children,

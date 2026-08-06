@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@/generated/prisma";
 import { AssignmentWithClass } from "@/lib/assignments";
 import { addDays } from "@/lib/utils/dateUtils";
 import { verifyAssignmentStatus } from "./assignments";

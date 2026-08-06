@@ -1,6 +1,6 @@
 "use client"
 
-import { User } from "@prisma/client";
+import { User } from "@/generated/prisma";
 
 import { createContext, useState, useMemo, type Dispatch, type SetStateAction } from "react";
 

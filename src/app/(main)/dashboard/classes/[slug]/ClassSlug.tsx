@@ -3,7 +3,7 @@
 import { notFound } from "next/navigation";
 import { ClassComplete } from "./page";
 import { AssignmentDisplay } from "../../components/ui/AssignmentDisplay";
-import { Class } from "@prisma/client";
+import { Class } from "@/generated/prisma";
 
 export default function ClassSlugClient({
   data,
