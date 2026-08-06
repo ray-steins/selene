@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@/generated/prisma";
+import { Prisma } from "@/generated/prisma/client";
 import { AssignmentWithClass } from "@/lib/assignments";
 import { addDays } from "@/lib/utils/dateUtils";
 

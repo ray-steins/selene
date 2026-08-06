@@ -4,7 +4,7 @@ import ActionStateForm from "@/components/ui/forms/ActionStateForm";
 import { Input } from "@/components/ui/inputs/Input";
 import { assignmentPrefixGenerator } from "@/lib/prefixes";
 import { sortPrefixMapArray } from "@/lib/utils/stringUtils";
-import { Class } from "@/generated/prisma";
+import type { Class } from "@/generated/prisma/client";
 import { useState } from "react";
 
 import style from './assignment-components.module.scss';

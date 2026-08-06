@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@/generated/prisma";
+import { Prisma } from "@/generated/prisma/client";
 
 export async function getClasses<T extends Prisma.ClassSelect>(select?: T) {
   return await prisma.class.findMany({
