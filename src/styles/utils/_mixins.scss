@@ -1,0 +1,54 @@
+@mixin full-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column($gap: null) {
+  display: flex;
+  flex-direction: column;
+
+  gap: $gap
+}
+
+@mixin limit-width($min, $default, $max) {
+  min-width: $min;
+  width: $default;
+  max-width: $max;
+}
+
+@mixin limit-height($min, $default, $max) {
+  min-height: $min;
+  height: $default;
+  max-height: $max;
+}
+
+@mixin all-pos-zero {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0 
+}
+
+@mixin full-size {
+  width: 100%;
+  height: 100%;
+}
+
+@mixin darkenBackground($ref, $int) {
+  background-color: oklch(from $ref calc(l - $int) c h)
+}
+
+@mixin containerDropShadow {
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.356);
+}
+
+@mixin vertical-padding($top, $bottom: $top) {
+  padding-top: $top;
+  padding-bottom: $bottom;
+}
+
+@mixin horizontal-padding($left, $right: $left) {
+  padding-left: $left;
+  padding-right: $right;
+}

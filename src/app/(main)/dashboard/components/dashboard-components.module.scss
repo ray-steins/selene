@@ -1,0 +1,95 @@
+@use '../../../../styles/utils/index' as *;
+
+// Dashboard wrapper
+.dashboard-wrapper {
+  @include full-size;
+  @include flex-column();
+
+  overflow: hidden;
+}
+
+// Main dashboard contents (nav bar + main contents) wrapper
+.main-dashboard-contents-wrapper {
+  min-height: 0;
+  min-width: 0;
+
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+}
+
+// Main contents container
+.main-contents-container {
+  @include flex-column();
+
+  padding: var(--unit-32px);
+
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-y: auto;
+
+  background-color: var(--color-background-deep);
+}
+
+// Main contents wrapper
+.main-contents-wrapper {
+  width: 100%;
+  max-width: 1600px;
+
+  height: 100%;
+}
+
+// Sidebar Navigation
+.sidebar-wrapper {
+  @include flex-column(var(--unit-24px));
+
+  background-color: var(--color-background);
+  padding-top: var(--unit-64px);
+
+  min-width: 200px;
+  height: 100%;
+  border-right: var(--contianer-border-size) solid var(--color-border);
+
+  &__new-button-wrapper {
+    @include horizontal-padding(var(--unit-16px), 0);
+  }
+  
+  &__nav-list {
+    @include full-size;
+    @include flex-column();
+
+    background-color: inherit;
+
+    &__link {
+      @include full-size;
+      
+      background-color: inherit;
+      &--active {
+        background-color: var(--color-primary);
+        color: var(--color-foreground-inverse);
+        font-weight: var(--font-weight-bold);
+
+        &:hover {
+          background-color: var(--color-primary) !important;
+        }
+        &:active {
+          background-color: var(--color-primary) !important;
+        }        
+      }
+
+      &:hover {
+        @include darkenBackground(var(--color-background), 0.1)
+      }
+      &:active {
+        @include darkenBackground(var(--color-background), 0.2)
+      }
+
+      padding: var(--unit-16px);    
+
+      display: block;
+    }
+  }
+}

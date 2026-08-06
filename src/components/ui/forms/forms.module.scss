@@ -1,0 +1,25 @@
+@use '../../../styles/utils/index' as *;
+
+.form {
+  @include flex-column(var(--unit-8px));
+
+  & fieldset {
+    @include vertical-padding(
+      var(--unit-16px)
+    );
+    @include horizontal-padding(
+      var(--unit-24px)
+    );
+    @include flex-column(var(--unit-16px));
+
+    border-radius: 4px;
+
+    & legend {  
+      @include horizontal-padding(var(--unit-8px));
+
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-mute);
+    }
+  }
+}

@@ -1,0 +1,30 @@
+@use '../../../../../styles/utils/index.scss' as *;
+
+.assignment-info-wrapper {
+  &__info-container {
+    @include flex-column();
+
+    &__title {
+      @include flex-column(var(--unit-8px));
+
+      &__main {
+        @include flex-column(var(--unit-4px));
+      }
+    }
+  }
+}
+
+.title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.minor-1 {
+  font-size: var(--font-size-m);
+  color: var(--color-mute-partial);
+}
+
+.minor-2 {
+  font-size: var(--font-size-sm);
+  color: var(--color-mute-half);
+}

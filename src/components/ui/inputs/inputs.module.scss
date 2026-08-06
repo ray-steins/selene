@@ -1,0 +1,33 @@
+@use '../../../styles/utils/index.scss' as *;
+
+.wrapper {
+  @include flex-column(var(--unit-4px));
+
+  &__label {
+    font-size: var(--font-size-sm);
+    color: var(--color-mute-half);
+  }
+
+  &:has(.wrapper__input:focus) &__label {
+    color: var(--color-primary)
+  }
+
+  &__input {
+    border: none;
+    outline: 1.5px solid var(--color-border);
+
+    padding: var(--unit-8px);
+    font-size: var(--font-size-sm);
+    font-family: var(--font-inter);
+
+    border-radius: 4px;
+
+    &:focus {
+      outline-color: var(--color-primary);
+    }
+  }
+}
+
+.checklist-container {
+  @include flex-column();
+}
