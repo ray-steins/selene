@@ -21,14 +21,15 @@ export default async function ClassSlug({
   const currentUser = await getCurrentUserFromServer();
 
   const slug = (await params).slug;
-  const c: ClassComplete = await getClassBySlug(slug);
-  const classList = await getUserClasses(currentUser!.id);
 
-  if (!classList?.some(c => c.slug === slug)) return <NotInClass />;
+  const classData: ClassComplete = await getClassBySlug(slug, currentUser?.id);
+  const userClasses = await getUserClasses(currentUser!.id);
+
+  if (!userClasses?.some(c => c.slug === slug)) return <NotInClass />;
 
   return (
     <>
-      <ClassSlugClient data={c} classList={classList}/>
+      <ClassSlugClient data={classData}/>
     </>
   )
 }

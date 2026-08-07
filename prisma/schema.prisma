@@ -94,6 +94,7 @@ model Assignment {
   slug           String   @unique
   title          String
   description    String
+  announcedAt    DateTime @default(now())
   submissionDate DateTime
 
   totalScore Int?

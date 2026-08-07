@@ -40,7 +40,7 @@
 }
 
 @mixin containerDropShadow {
-  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.356);
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.13);
 }
 
 @mixin vertical-padding($top, $bottom: $top) {

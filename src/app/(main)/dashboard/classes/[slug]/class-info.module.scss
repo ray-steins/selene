@@ -1,0 +1,21 @@
+@use '../../../../../styles/utils/index' as *;
+
+.class-info-wrapper {
+  @include flex-column(var(--unit-16px));
+
+  &__assignment-section {
+    @include flex-column(var(--gap-dashboard-containers));
+
+    &__upper {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+
+      &>* {
+        flex: 1
+      }
+
+      gap: var(--gap-dashboard-containers);      
+    }
+  }
+}

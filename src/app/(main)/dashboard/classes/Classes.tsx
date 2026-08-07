@@ -9,6 +9,7 @@ import { ROUTES } from "@/configs/app.config";
 import { PrimaryButton } from "@/components/ui/buttons";
 
 import style from './dashboard-classes.module.scss';
+import { removeUserFromClass } from "@/actions/user";
 
 function ClassCard({
   data,
@@ -36,23 +37,20 @@ function ClassCard({
     <div className={style['class-card-container']}>
       <a href={link} className={style['class-card-container__wrapper-link']}>
         <div
-          style={{
-            aspectRatio: '1', 
-            width: '100px', 
-            border: 'var(--container-border-size) solid var(--color-border)'
-          }}
           className={style['class-card-container__wrapper-link__box']}
         />      
       </a>
       <div className={style['class-card-container__class-name-wrapper']}>
         {editing ? (
           <input 
-            className={style['class-card-container__class-name-wrapper__name']}
-
+            className={`${style['class-card-container__class-name-wrapper__input']} ${style['class-name-edit']}`}
             value={value}
             ref={inputRef}
             onChange={(e) => setValue(e.target.value)}
-            onBlur={commit}
+            onBlur={(e) => {
+              console.log(data.name, 'blurred');
+              commit();
+            }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') commit();
               if (e.key === 'Escape') {
@@ -62,7 +60,13 @@ function ClassCard({
             }}        
           />
         ): (
-          <span onDoubleClick={() => setEditing(true)}>{ data.name} </span>
+          <span 
+            onDoubleClick={() => setEditing(true)}
+
+            className={`${style['class-card-container__class-name-wrapper__name']} ${style['class-name-edit']}`}
+          >
+            { data.name}
+          </span>
         )}
       </div>
     </div>
@@ -112,7 +116,7 @@ export default function ClassesPageClient({
     startTransition(async () => {
       applyOptimistic({ type: 'remove', slug });
       try {
-        await deleteClass(slug);
+        await removeUserFromClass(currentUser?.id!, slug);
         setClasses(prev => prev.filter(c => c.slug !== slug))
       } catch (error) {
         alert(`Failed to remove class ${slug}`)
@@ -131,12 +135,12 @@ export default function ClassesPageClient({
   return (
     <div>
       <PrimaryButton type='button' onClick={addClass}>Add Class</PrimaryButton>
-      <div>
+      <div className={style['classes-container']}>
         {optimisticClass.map((v, i) => {
-          const link = `${ROUTES.dashboard.classes}${v.slug}`;
+          const link = `${ROUTES.dashboard.classes}/${v.slug}`;
 
           return (
-            <div key={`${v}-${i}`}>
+            <div key={`${v}-${i}`} className={style['classes-container__class-wrapper']}>
               <ClassCard data={v} onRename={handleRename} link={link} />
               <button type='button' onClick={() => removeClass(v.slug)}>Remove</button>              
             </div>

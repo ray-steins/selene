@@ -7,7 +7,13 @@ export type AssignmentWithClass = ({
 } & Assignment);
 
 export type AssignmentStatusFilterMode = 'recent' | 'past-due' | 'completed';
-export type AssignmentDueFilterMode = 'day' | 'week' | 'month'
+export type AssignmentDueFilterMode = 'day' | 'week' | 'month';
+
+export const AssignmentStatusColors: Record<AssignmentStatus, string> = {
+  'completed': 'var(--color-semantic-ok)',
+  'pastdue': 'var(--color-semantic-warning)',
+  'pending': 'var(--color-mute)'
+}
 
 export function filterAssignmentOnStatus(
   assignments: AssignmentWithClass[], 

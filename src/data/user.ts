@@ -2,8 +2,6 @@ import { prisma } from "@/lib/prisma";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { Prisma } from "@/generated/prisma/client";
-import { AssignmentWithClass } from "@/lib/assignments";
-import { addDays } from "@/lib/utils/dateUtils";
 import { verifyAssignmentStatus } from "./assignments";
 
 export type UserClasses = Awaited<ReturnType<typeof getUserClasses>>

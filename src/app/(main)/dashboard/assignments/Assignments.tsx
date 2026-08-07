@@ -57,7 +57,7 @@ export default function AssignmentsPageClient({
   return (
     <div className={style['assignment-lists-wrapper']}>
       <div className={`${style['assignment-lists-wrapper__main']} ${style['section']}`}>
-        <div className={style['assignment-lists-wrapper__main__upper']}>
+        <section className={style['assignment-lists-wrapper__main__upper']}>
           <DashboardPercentageContianer title='Completed assignments' 
             max={assignments.length}
             value={assignments.filter(v => v.status === 'completed').length}
@@ -66,8 +66,8 @@ export default function AssignmentsPageClient({
             max={filteredAssignmentsOnDate.week.length}
             value={filteredAssignmentsOnDate.week.filter(v => v.status === 'completed').length}
           />
-        </div>
-        <div className={style['assignment-lists-wrapper__main__lower']}>
+        </section>
+        <section className={style['assignment-lists-wrapper__main__lower']}>
           <AssignmentDisplay tab 
             assignmentTabs={AssignmentGeneralTabs}
             title='Your assignments'
@@ -76,7 +76,7 @@ export default function AssignmentsPageClient({
             assignmentTabs={AssignmentsSubmissionTabs}
             title='To be submitted'
           />
-        </div>
+        </section>
       </div>
     </div>
   )

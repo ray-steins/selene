@@ -4,15 +4,16 @@ import { fixDate } from "@/lib/utils/dateUtils";
 import { DashboardItemListDisplayType } from "@/types/UI";
 import { ROUTES } from '@/configs/app.config';
 import TabSwitch, { TabSwitchData } from '@/components/containers/Tabswitch';
-import type { AssignmentStatus } from '@prisma/client';
 import Link from 'next/link';
 import DashboardContainer from './DashboardContainer';
-import { AssignmentWithClass } from '@/lib/assignments';
+import { AssignmentStatusColors, AssignmentWithClass } from '@/lib/assignments';
+import { capitalize } from '@/lib/utils/stringUtils';
 
 type AssignmentListProps = {
   assignments: AssignmentWithClass[],
   title?: string,
-  limit?: number
+  limit?: number,
+  showStatus?: boolean
 }
 
 export type AssignmentTabData = {
@@ -37,11 +38,13 @@ export type AssignmentDisplayProps = (WithTab | WithoutTab) & {
   displayType?: DashboardItemListDisplayType
   tab?: boolean
   title?: string
+  showStatus?: boolean
 }
 
 function AssignmentListTable({
   assignments,
-  limit
+  limit,
+  showStatus,
 }: AssignmentListProps) {
   return (
     <div className={style['assignment-display-container__wrapper']}>
@@ -53,6 +56,7 @@ function AssignmentListTable({
               <th>Title</th>
               <th>Class(es)</th>
               <th>Submission Date</th>
+              { showStatus && <th>Status</th> }
             </tr>
           </thead>
           <tbody>
@@ -70,6 +74,29 @@ function AssignmentListTable({
                   <td>{ v.title }</td>
                   <td>{ classes }</td>
                   <td>{ submissionDate }</td>
+                  { showStatus && 
+                    <td>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 'var(--unit-4px)'
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: '1em',
+                            aspectRatio: 1,
+
+                            backgroundColor: `${AssignmentStatusColors[v.status]}`,
+                            borderRadius: '999px'
+                          }}
+                        />
+                        <span> { capitalize(v.status) }</span>
+                      </div>
+                      
+                    </td> 
+                  }
                   <td className={style['row-link-wrapper']}>
                     <Link href={link} className={style['row-link']}/>
                   </td>
@@ -97,6 +124,7 @@ export function AssignmentDisplay({
   tab,
   limit,
   assignmentTabs,
+  showStatus,
   displayType = 'table',
   title
 }: AssignmentDisplayProps) {
@@ -111,26 +139,33 @@ export function AssignmentDisplay({
       assignments={assignments}
       title={title}
       limit={limit}
+      showStatus={showStatus}
     />
   );
 
-  const TabswitchData: TabSwitchData = assignmentTabs!.map(v => {
-    return {
-      name: v.name,
-      component: <DisplayComponent assignments={v.assignments}/>
+  const ComponentToDisplay = () => {
+    if (tab && assignmentTabs) {
+      const TabswitchData: TabSwitchData = assignmentTabs!.map(v => {
+        return {
+          name: v.name,
+          component: <DisplayComponent assignments={v.assignments} showStatus={showStatus}/>
+        }
+      });
+
+      return <TabSwitch data={TabswitchData}/>
+    } else {
+      return (
+        <DisplayComponent 
+          title={title}
+          assignments={assignments!}
+        />
+      )
     }
-  });
+  }
 
   return (
     <DashboardContainer title={title} className={style['assignment-display-container']}>
-      {tab ? 
-        <TabSwitch 
-          data={TabswitchData}
-        /> : 
-        <DisplayComponent 
-          assignments={assignments!} 
-          title={title}
-        />}
+      <ComponentToDisplay />
     </DashboardContainer>
   )
 }

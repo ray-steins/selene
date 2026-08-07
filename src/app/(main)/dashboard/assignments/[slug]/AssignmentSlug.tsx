@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import style from './assignment-info.module.scss';
 import { GhostButton, PrimaryButton } from "@/components/ui/buttons";
 import { startTransition, useContext, useOptimistic, useState } from "react";
-import { markCompleteAssignmentForUser, unmarkCompleteAssignmentForUser } from "@/actions/assignment";
+import { markCompleteAssignmentForUser, unmarkCompleteAssignmentForUser } from "@/actions/user";
 import { UserContext } from "@/contexts/UserContex";
 
 function MarkCompleteButton({
