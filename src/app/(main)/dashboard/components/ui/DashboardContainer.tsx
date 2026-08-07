@@ -84,7 +84,7 @@ export function DashboardPercentageContianer({
               }}
             />
           </div>
-          <span className={style['dashboard-percentage-contianer-wrapper__progress-bar__percentage']}>{ perecentage }%</span>
+          <span className={style['dashboard-percentage-contianer-wrapper__progress-bar__percentage']}>{ Math.round(perecentage) }%</span>
         </div>
       </div>
     </DashboardMinorContainer>

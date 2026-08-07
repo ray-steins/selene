@@ -49,7 +49,7 @@ export async function POST(req: Request) {
       ? Number(data.totalScore)
       : null;
 
-    const asgmnt = await prisma.assignment.create({
+    await prisma.assignment.create({
       data: {
         ...data,
         slug,
@@ -60,8 +60,7 @@ export async function POST(req: Request) {
         }
       }
     });
-    console.log(asgmnt);
-
+    
     return NextResponse.json(
       { message: 'Sucessfuly added assignment.' },
       { status: 200 }

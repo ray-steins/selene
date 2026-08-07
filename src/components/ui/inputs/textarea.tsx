@@ -20,6 +20,7 @@ export default function TextArea({
   return (
     <InputWrapper id={txtareaId} label={label}>
       <textarea 
+        name={name}
         className={`${className} ${style['wrapper__input']}`}
         {...props}
       />
